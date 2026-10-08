@@ -1,6 +1,5 @@
 /**
  * Everything about the London event in one place, so copy changes stay out of the markup.
- * Anything marked TODO is a placeholder waiting on real details from the organisers.
  */
 export const event = {
   name: "Haven London",
@@ -11,8 +10,8 @@ export const event = {
   endsAt: "2026-11-14T21:00:00Z",
   venue: "Ada, the National College for Digital Skills",
   parentGuideUrl:
-    "https://docs.google.com/document/d/1NKjI_6sksQOKyrdeE1wEJZYSWEvix8LB74sIF2vokoI/edit?usp=sharing",
-  contactEmail: "haven@hackclub.com",
+    "https://docs.google.com/document/d/1o0IIxcglfIlBbyfnIONJiUj8o4oxToQYWQRMnnJKzkA",
+  contactEmail: "london@hackclub.com",
 } as const;
 
 /** The email box submits as a GET, so these become the query string in this order, then `email`. */
@@ -23,7 +22,7 @@ export const signup = {
     ref: "short-link-referral",
     event: "recQ6BUrgLYAcLZ7M",
   },
-  placeholder: "you@example.com",
+  placeholder: "johndoe@gmail.com",
   button: "sign up!",
 } as const;
 
@@ -49,50 +48,35 @@ export const perks = [
   },
 ] as const;
 
-/** Draft running order. TODO: confirm with the team before launch. */
 export const schedule = [
-  { time: "09:00", title: "Doors open", detail: "Check in, grab breakfast, find a seat." },
-  { time: "09:45", title: "Kickoff", detail: "Welcome, theme reveal and team forming." },
-  { time: "10:30", title: "Start jamming", detail: "Workshops run alongside for beginners." },
-  { time: "13:00", title: "Lunch", detail: "Free food. Obviously." },
-  { time: "14:00", title: "Workshops & building", detail: "Mentors on hand all afternoon." },
-  { time: "18:00", title: "Dinner", detail: "Refuel for the final push." },
-  { time: "19:00", title: "Pencils down & demos", detail: "Ship to itch.io, then show it off." },
-  { time: "20:30", title: "Prizes & wrap up", detail: "Awards, photos and goodbyes." },
-  { time: "21:00", title: "Doors close", detail: "Home time!" },
+  { time: "TBD!", title: "We're still working out the schedule. Sign up and we'll let you know as soon as we figure it out!", detail: "" },
 ] as const;
 
 export const venue = {
   name: event.venue,
-  // TODO: exact campus and street address.
-  address: null as string | null,
-  // TODO: add nearest stations once the campus is confirmed, e.g. { line: "Victoria", station: "Pimlico" }.
-  travel: [] as { line: string; station: string; note?: string }[],
-  // TODO: Google Maps embed URL for the confirmed address.
-  mapEmbedUrl: null as string | null,
+  address: "1 Sutherland St, Pimlico, London SW1V 4LD",
+  travel: [{ line: "Victoria", station: "Pimlico" }, { line: "Circle", station: "Sloane Square" }] as { line: string; station: string; note?: string }[],
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.302427537281!2d-0.1497113222096472!3d51.489317471809414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761c3b9c336b35%3A0xb559f2dd59d7c71!2sAda%2C%20the%20National%20College%20for%20Digital%20Skills!5e0!3m2!1sen!2suk!4v1791479954312!5m2!1sen!2suk",
   notes: [
-    "Doors open at 09:00. Please arrive on time for kickoff.",
-    "Bring photo ID or your sign-up confirmation email to check in.",
-    "The day is free, including food. Let us know about dietary needs when you sign up.",
+    "Doors open at 09:00. For safeguarding purposes, we cannot accept latecomers.",
+    "You will receive a QR code after signing up that you must bring to check in.",
+    "The day is free, including food. You'll be asked about dietary requirements prior to the event.",
+    "Bring a friend! Even if they don't know anything about coding, we'll ensure they have a great time."
   ],
 };
 
-/** TODO: swap `logo` in for real logo files under /public/images/sponsors/. */
 export const sponsors = [
-  {
-    name: "Ada, the National College for Digital Skills",
-    href: "https://ada.ac.uk",
-    logo: null as string | null,
-  },
-  { name: "ElevenLabs", href: "https://elevenlabs.io", logo: null as string | null },
+  { name: "Ada College", href: "https://ada.ac.uk", logo: "/images/sponsors/ada.webp" },
+  { name: "ElevenLabs", href: "https://elevenlabs.io", logo: "/images/sponsors/elevenlabs.webp" },
 ];
 
-/** TODO: real organisers. `photo` is a path under /public/images/team/. */
 export const team = [
-  { name: "Organiser name", role: "Lead organiser", photo: null as string | null },
-  { name: "Organiser name", role: "Workshops", photo: null as string | null },
-  { name: "Organiser name", role: "Logistics", photo: null as string | null },
-  { name: "Organiser name", role: "Outreach", photo: null as string | null },
+  { name: "Matthew S", role: "Lead organiser", photo: "/images/team/mattsoh.webp" },
+  { name: "Jupiter F", role: null as string | null, photo: "/images/team/lamparter.webp" },
+  { name: "Nirvaan T", role: null as string | null, photo: "/images/team/duckida.webp" },
+  { name: "Nihaal S", role: null as string | null, photo: null as string | null },
+  { name: "Arca C", role: null as string | null, photo: "/images/team/arc.webp" },
+  { name: "Derek Y", role: null as string | null, photo: "/images/team/derekyuan100.webp" },
 ];
 
 export const resources = [
@@ -109,39 +93,34 @@ export const resources = [
   },
 ];
 
-/**
- * London events Hack Club has run before.
- * TODO: add photos (paths under /public/images/past/) and shipped projects for each.
- */
 export const pastEvents = [
   {
     name: "Sunbeam London",
     date: "29 August 2026",
     where: "Hackney Depot",
-    blurb: "A free social coding event for girls aged 13–18.",
+    blurb: "A free social coding event for girls aged 13-18.",
     href: "https://sunbeam.hackclub.com/london",
-    photos: [] as { src: string; alt: string }[],
+    photos: [{ src: "/images/past/sunbeam-1.webp", alt: "Sunbeam London organisers group selfie" }] as { src: string; alt: string }[],
+    projects: [] as { title: string; href: string; by?: string }[],
+  },
+  {
+    name: "Campfire London",
+    date: "28 February 2026",
+    where: "Ada College",
+    blurb: "Part of Campfire, Hack Club's largest game jam: 10k teens making games in one weekend.",
+    href: "https://campfire.hackclub.com/london",
+    photos: [{ src: "/images/past/campfire-1.webp", alt: "Campfire London participants on the rooftop of Ada College" }] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
   },
   {
     name: "Daydream London",
     date: "28 September 2025",
-    where: "Ada, Pimlico",
+    where: "Ada College",
     blurb: "A one-day game jam where teams built and published games on itch.io.",
     href: "https://daydream.hackclub.com/london",
     photos: [] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
-  },
-  {
-    // TODO: date, venue and a blurb for Campfire London.
-    name: "Campfire London",
-    date: null as string | null,
-    where: null as string | null,
-    blurb: "Part of Campfire, Hack Club’s largest game jam: 10k teens making games in one weekend.",
-    href: "https://campfire.hackclub.com",
-    photos: [] as { src: string; alt: string }[],
-    projects: [] as { title: string; href: string; by?: string }[],
-  },
+  }
 ];
 
 export const faqs = [
