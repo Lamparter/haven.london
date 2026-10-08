@@ -5,7 +5,7 @@
 export const event = {
   name: "Haven London",
   tagline: "A game jam for teens aged 13-18",
-  dateLabel: "Saturday 14 November 2026",
+  dateLabel: "Saturday, 14 November 2026",
   timeLabel: "09:00 - 21:00",
   startsAt: "2026-11-14T09:00:00Z",
   endsAt: "2026-11-14T21:00:00Z",
@@ -36,16 +36,16 @@ export const navLinks = [
 
 export const perks = [
   {
-    title: "Learn & Build",
+    title: "Learn & build",
     blurb: "Follow workshops or create at your own pace.",
   },
   {
-    title: "Make Friends",
+    title: "Make friends",
     blurb: "Meet other teens in London who love making things.",
   },
   {
-    title: "Free Food & Prizes",
-    blurb: "Can’t say no to free snacks :)",
+    title: "Free food & prizes",
+    blurb: "You wouldn't possibly say no to free snacks!",
   },
 ] as const;
 
@@ -147,10 +147,10 @@ export const pastEvents = [
 export const faqs = [
   {
     q: "Who can come?",
-    a: "Anyone aged 13–18. No prior coding or game-making experience needed.",
+    a: "Anyone aged 13-18. No prior coding or game-making experience needed.",
   },
   {
-    q: "I’ve never made a game. Is that okay?",
+    q: "I've never made a game. Is that okay?",
     a: "Absolutely! There are workshops, mentors and teammates to help you get started.",
   },
   {
