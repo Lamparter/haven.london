@@ -1,0 +1,159 @@
+---
+import Roundel from "./Roundel.astro";
+import { pastEvents } from "../data/event";
+---
+
+<section id="past" class="past">
+  <div class="shell">
+    <Roundel label="Past stops" />
+    <h2>We’ve jammed in London before</h2>
+    <p class="sub">Here’s what happened last time, and what people shipped.</p>
+
+    <ul class="events">
+      {
+        pastEvents.map((e) => (
+          <li class="card">
+            <div class="photos">
+              {e.photos.length ? (
+                e.photos.slice(0, 2).map((p) => <img src={p.src} alt={p.alt} loading="lazy" />)
+              ) : (
+                <p class="placeholder">photos coming soon 📸</p>
+              )}
+            </div>
+            <div class="body">
+              <h3>
+                <a href={e.href}>{e.name}</a>
+              </h3>
+              {(e.date || e.where) && (
+                <p class="meta">{[e.date, e.where].filter(Boolean).join(" · ")}</p>
+              )}
+              <p>{e.blurb}</p>
+              {e.projects.length > 0 && (
+                <>
+                  <h4>Shipped</h4>
+                  <ul class="projects">
+                    {e.projects.map((p) => (
+                      <li>
+                        <a href={p.href}>{p.title}</a>
+                        {p.by && <span> by {p.by}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .past {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: linear-gradient(var(--haven-orange-mid), var(--haven-orange-deep));
+    text-align: center;
+    color: #fff;
+  }
+
+  /* The roundel ring would vanish on orange, so swap it to yellow here. */
+  .past :global(.ring) {
+    border-color: var(--haven-yellow);
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+  }
+
+  .sub {
+    margin: 0.75rem 0 2.5rem;
+    font-size: 1.15rem;
+    color: var(--haven-butter);
+  }
+
+  .events {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .card {
+    overflow: hidden;
+    background: #fff;
+    border-radius: 1.2rem;
+    color: var(--haven-brown-dark);
+    transition: transform 0.25s var(--ease-bounce);
+  }
+
+  .card:nth-child(odd):hover {
+    transform: rotate(-1.5deg) scale(1.02);
+  }
+
+  .card:nth-child(even):hover {
+    transform: rotate(1.5deg) scale(1.02);
+  }
+
+  .photos {
+    display: grid;
+    grid-auto-flow: column;
+    aspect-ratio: 16 / 9;
+    background: var(--haven-butter);
+  }
+
+  .photos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .placeholder {
+    margin: 0;
+    place-self: center;
+    color: var(--haven-brown-dark);
+  }
+
+  .body {
+    padding: 1.25rem 1.4rem 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.9rem;
+  }
+
+  h3 a {
+    color: var(--haven-orange-deep);
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .meta {
+    margin: 0.4rem 0 0;
+    color: var(--haven-teal);
+  }
+
+  .body p {
+    line-height: 1.35;
+  }
+
+  h4 {
+    margin: 1rem 0 0.25rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--haven-orange-bright);
+  }
+
+  .projects {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+</style>

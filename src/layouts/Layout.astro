@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import { event } from "../data/event";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${event.name} — ${event.tagline}`,
+  description = `${event.name} is a Hack Club game jam for teens 13–18 on ${event.dateLabel}. Free food, workshops and new friends.`,
+} = Astro.props;
+---
+
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ed5615" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Jua&display=swap"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

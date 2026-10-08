@@ -1,0 +1,102 @@
+---
+import Skyline from "./Skyline.astro";
+
+const links = [
+  { href: "https://hackclub.com", label: "Hack Club" },
+  { href: "https://haven.hackclub.com", label: "Haven worldwide" },
+  { href: "https://hackclub.com/slack", label: "Slack" },
+  { href: "https://hackclub.com/conduct", label: "Code of Conduct" },
+];
+---
+
+<div class="skyline-wrap"><Skyline /></div>
+<footer class="footer">
+  <div class="shell inner">
+    <div>
+      <img src="/images/logo.webp" alt="Hack Club Haven" width="778" height="445" class="logo" />
+      <nav aria-label="Hack Club">
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="body">
+      <p>
+        Haven London is part of Hack Club Haven, a global game jam for teens in 200+ cities. Hack
+        Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers.
+      </p>
+      <p>Made with 🧡 in London.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
+    background: var(--haven-orange-deep);
+    color: #fff;
+  }
+
+  .skyline-wrap {
+    background: var(--haven-green-deep);
+  }
+
+  .inner {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  @media (width >= 48rem) {
+    .inner {
+      grid-template-columns: minmax(0, 18rem) 1fr;
+    }
+  }
+
+  .logo {
+    width: clamp(6rem, 18vw, 10rem);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (width >= 48rem) {
+    ul {
+      flex-direction: column;
+    }
+  }
+
+  ul a {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  ul a:hover {
+    color: var(--haven-yellow);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    line-height: 1.4;
+  }
+
+  .body p {
+    margin: 0;
+  }
+</style>

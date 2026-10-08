@@ -1,0 +1,113 @@
+/* Palette and type lifted from hackclub/haven's app.css. */
+:root {
+  --font-display: "Darumadrop One", "Jua", ui-rounded, system-ui, sans-serif;
+  --font-body: "Jua", ui-rounded, system-ui, sans-serif;
+
+  --haven-green: #b8c220;
+  --haven-green-deep: #97a01a;
+  --haven-orange-deep: #ed5615;
+  --haven-orange-bright: #fa681b;
+  --haven-orange-mid: #fc8616;
+  --haven-yellow: #ffd059;
+  --haven-butter: #ffe382;
+  --haven-gold: #fba71f;
+  --haven-brown-dark: #b8774a;
+  --haven-brown-light: #dda47d;
+  --haven-teal: #2cbf90;
+
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --header-h: 7.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  margin: 0;
+  background: var(--haven-green);
+  font-family: var(--font-body);
+  color: var(--haven-orange-deep);
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--haven-yellow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.shell {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.marker {
+  background-color: var(--haven-yellow);
+  border-radius: 0.45em;
+  padding: 0.1em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.6em 1.4em;
+  border-radius: 1.875rem;
+  background: var(--haven-orange-deep);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  box-shadow: 0 0 12px rgb(237 86 21 / 0.5);
+  transition: transform 0.2s var(--ease-bounce);
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

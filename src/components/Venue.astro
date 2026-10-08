@@ -1,0 +1,165 @@
+---
+import Roundel from "./Roundel.astro";
+import { venue } from "../data/event";
+---
+
+<section id="venue" class="venue">
+  <div class="shell">
+    <Roundel label="Getting there" />
+    <h2>{venue.name}</h2>
+    <p class="address">{venue.address ?? "Full address coming soon"}</p>
+
+    <div class="grid">
+      <div class="panel map">
+        {
+          venue.mapEmbedUrl ? (
+            <iframe
+              src={venue.mapEmbedUrl}
+              title={`Map of ${venue.name}`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <p class="placeholder">Map coming soon 🗺️</p>
+          )
+        }
+      </div>
+
+      <div class="panel">
+        <h3>By Tube & rail</h3>
+        {
+          venue.travel.length ? (
+            <ul class="stations">
+              {venue.travel.map((t) => (
+                <li>
+                  <span class="station">{t.station}</span>
+                  <span class="line-name">{t.line}</span>
+                  {t.note && <span class="note">{t.note}</span>}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Nearest stations will go here once the campus is confirmed.</p>
+          )
+        }
+
+        <h3>Good to know</h3>
+        <ul class="notes">
+          {venue.notes.map((note) => <li>{note}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venue {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: var(--haven-green);
+    text-align: center;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #fff;
+    text-shadow: 0 0 12px var(--haven-orange-deep);
+  }
+
+  .address {
+    margin: 0.75rem 0 2.5rem;
+    font-size: 1.2rem;
+    color: var(--haven-orange-deep);
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  @media (width >= 48rem) {
+    .grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .panel {
+    padding: 1.5rem;
+    background: rgb(255 255 255 / 0.85);
+    border-radius: 1.2rem;
+  }
+
+  .map {
+    display: grid;
+    place-items: center;
+    min-height: 18rem;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 18rem;
+    border: 0;
+  }
+
+  .placeholder {
+    color: var(--haven-brown-dark);
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+    color: var(--haven-orange-bright);
+  }
+
+  h3:not(:first-child) {
+    margin-top: 1.5rem;
+  }
+
+  .panel p,
+  .notes {
+    color: var(--haven-brown-dark);
+    line-height: 1.4;
+  }
+
+  .stations,
+  .notes {
+    margin: 0.75rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .stations {
+    padding: 0;
+    list-style: none;
+  }
+
+  .stations li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.6rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+  }
+
+  .station {
+    font-size: 1.15rem;
+    color: var(--haven-orange-deep);
+  }
+
+  .line-name {
+    padding: 0.05rem 0.5rem;
+    background: var(--haven-teal);
+    border-radius: 0.4rem;
+    color: #fff;
+    font-size: 0.85rem;
+  }
+
+  .note {
+    width: 100%;
+    font-size: 0.95rem;
+    color: var(--haven-brown-dark);
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import Roundel from "./Roundel.astro";
+import { event, schedule } from "../data/event";
+---
+
+<section id="schedule" class="schedule">
+  <div class="shell">
+    <Roundel label="Schedule" />
+    <h2>The Haven Line</h2>
+    <p class="sub">{event.dateLabel} · {event.timeLabel} · all stops subject to change</p>
+
+    <!-- Drawn as a Tube line: each stop is a "station" on one vertical route. -->
+    <ol class="line">
+      {
+        schedule.map((stop) => (
+          <li>
+            <time>{stop.time}</time>
+            <span class="dot" aria-hidden="true" />
+            <div>
+              <h3>{stop.title}</h3>
+              <p>{stop.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .schedule {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: var(--haven-butter);
+    text-align: center;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--haven-orange-deep);
+  }
+
+  .sub {
+    margin: 0.75rem 0 2.5rem;
+    color: var(--haven-brown-dark);
+    font-size: 1.1rem;
+  }
+
+  .line {
+    --track: var(--haven-orange-deep);
+    position: relative;
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .line::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    left: calc(4.5rem + 0.75rem);
+    width: 0.6rem;
+    translate: -50% 0;
+    background: var(--track);
+    border-radius: 1rem;
+  }
+
+  li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.5rem 1.5rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+    padding-bottom: 1.4rem;
+  }
+
+  li:last-child {
+    padding-bottom: 0;
+  }
+
+  time {
+    padding-top: 0.15rem;
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--haven-orange-deep);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dot {
+    position: relative;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    margin-top: 0.2rem;
+    background: #fff;
+    border: 0.3rem solid var(--track);
+    border-radius: 50%;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: var(--haven-orange-bright);
+  }
+
+  li p {
+    margin: 0.3rem 0 0;
+    color: var(--haven-brown-dark);
+  }
+</style>

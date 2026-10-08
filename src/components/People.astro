@@ -1,0 +1,198 @@
+---
+import Roundel from "./Roundel.astro";
+import { resources, sponsors, team } from "../data/event";
+---
+
+<section id="team" class="people">
+  <div class="shell">
+    <Roundel label="The crew" />
+    <h2>Meet the organisers</h2>
+    <ul class="team">
+      {
+        team.map((person) => (
+          <li>
+            {person.photo ? (
+              <img src={person.photo} alt="" loading="lazy" />
+            ) : (
+              <span class="avatar" aria-hidden="true">
+                ?
+              </span>
+            )}
+            <span class="name">{person.name}</span>
+            <span class="role">{person.role}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 id="sponsors" class="spaced">Supported by</h2>
+    <ul class="sponsors">
+      {
+        sponsors.map((s) => (
+          <li>
+            <a href={s.href}>{s.logo ? <img src={s.logo} alt={s.name} /> : s.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 id="resources" class="spaced">Resources</h2>
+    <ul class="resources">
+      {
+        resources.map((r) => (
+          <li>
+            {r.href ? (
+              <a href={r.href} target="_blank" rel="noopener">
+                <h3>{r.title} ↗</h3>
+                <p>{r.blurb}</p>
+              </a>
+            ) : (
+              <div class="soon">
+                <h3>{r.title}</h3>
+                <p>{r.blurb}</p>
+                <p class="tag">link coming soon</p>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .people {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: var(--haven-green-deep);
+    text-align: center;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    color: #fff;
+    text-shadow: 0 0 12px var(--haven-orange-deep);
+  }
+
+  .spaced {
+    margin-top: clamp(3.5rem, 7vw, 5rem);
+  }
+
+  ul {
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .team {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .team li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .team img,
+  .avatar {
+    width: 7rem;
+    aspect-ratio: 1;
+    margin-bottom: 0.5rem;
+    border: 0.35rem solid var(--haven-yellow);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .avatar {
+    display: grid;
+    place-items: center;
+    background: var(--haven-butter);
+    color: var(--haven-orange-deep);
+    font-family: var(--font-display);
+    font-size: 3rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .role {
+    color: var(--haven-butter);
+  }
+
+  .sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .sponsors a {
+    display: grid;
+    place-items: center;
+    min-width: 12rem;
+    min-height: 6rem;
+    padding: 1rem 1.5rem;
+    background: rgb(255 255 255 / 0.9);
+    border-radius: 1.2rem;
+    color: var(--haven-orange-deep);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  .sponsors a:hover {
+    transform: scale(1.05);
+  }
+
+  .sponsors img {
+    max-height: 4rem;
+    width: auto;
+  }
+
+  .resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .resources a,
+  .soon {
+    display: block;
+    height: 100%;
+    padding: 1.5rem;
+    background: var(--haven-butter);
+    border-radius: 1.2rem;
+    color: var(--haven-brown-dark);
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  .resources a:hover {
+    transform: translateY(-4px);
+  }
+
+  .resources h3 {
+    font-size: 1.7rem;
+    color: var(--haven-orange-deep);
+  }
+
+  .resources p {
+    margin: 0.6rem 0 0;
+    line-height: 1.35;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    background: var(--haven-orange-mid);
+    border-radius: 0.5rem;
+    color: #fff;
+  }
+</style>

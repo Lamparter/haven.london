@@ -1,0 +1,88 @@
+---
+import { perks } from "../data/event";
+---
+
+<section id="about" class="about">
+  <div class="shell">
+    <h2>What is a game jam?</h2>
+    <p class="intro">
+      It’s a social coding event where you
+      <span class="marker">make a video game with friends</span> + free food! It doesn’t matter if
+      you have years of experience or just learned what a game jam is today.
+    </p>
+
+    <ul class="perks">
+      {
+        perks.map((perk) => (
+          <li class="panel">
+            <h3>{perk.title}</h3>
+            <p>{perk.blurb}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    z-index: 2;
+    padding: clamp(6rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 6rem);
+    background: linear-gradient(var(--haven-green), var(--haven-green-deep));
+  }
+
+  h2 {
+    text-align: center;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: #fff;
+    text-shadow: 0 0 12px var(--haven-orange-deep);
+  }
+
+  .intro {
+    max-width: 40rem;
+    margin: 1.5rem auto 3rem;
+    text-align: center;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-shadow: 0 0 8px var(--haven-orange-deep);
+  }
+
+  .intro .marker {
+    color: var(--haven-orange-deep);
+    text-shadow: none;
+  }
+
+  .perks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .panel {
+    padding: 1.5rem;
+    background: rgb(255 255 255 / 0.85);
+    border-radius: 1.2rem;
+    transition: transform 0.25s var(--ease-bounce);
+  }
+
+  .panel:hover {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+
+  h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--haven-orange-bright);
+  }
+
+  .panel p {
+    margin: 0.75rem 0 0;
+    font-size: 1.1rem;
+    color: var(--haven-brown-dark);
+  }
+</style>

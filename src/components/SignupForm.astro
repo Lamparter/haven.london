@@ -1,0 +1,85 @@
+---
+import { signup } from "../data/event";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<!-- A plain GET form: the browser builds the sign-up URL from the hidden fields plus the email. -->
+<form class="signup" action={signup.action} method="get">
+  {Object.entries(signup.params).map(([name, value]) => <input type="hidden" name={name} value={value} />)}
+  <label for={id} class="sr-only">Email address</label>
+  <input
+    id={id}
+    type="email"
+    name="email"
+    required
+    autocomplete="email"
+    placeholder={signup.placeholder}
+  />
+  <button type="submit">{signup.button}</button>
+</form>
+
+<style>
+  .signup {
+    display: flex;
+    width: min(100%, 30rem);
+    padding: 0.35rem;
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 0 16px rgb(237 86 21 / 0.45);
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 1rem;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--haven-orange-deep);
+  }
+
+  input::placeholder {
+    color: var(--haven-brown-light);
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .signup:focus-within {
+    outline: 3px solid var(--haven-yellow);
+    outline-offset: 3px;
+  }
+
+  button {
+    padding: 0.6rem 1.3rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--haven-orange-deep);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    letter-spacing: -0.03em;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  button:hover {
+    transform: scale(1.06);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

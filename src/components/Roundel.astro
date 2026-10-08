@@ -1,0 +1,42 @@
+---
+/** A Tube-roundel-style section label, recoloured in Haven's palette. */
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="roundel" aria-hidden="true">
+  <span class="ring"></span>
+  <span class="bar">{label}</span>
+</span>
+
+<style>
+  .roundel {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 9rem;
+    height: 6rem;
+    margin-inline: auto;
+  }
+
+  .ring {
+    width: 5.5rem;
+    aspect-ratio: 1;
+    border: 0.9rem solid var(--haven-orange-deep);
+    border-radius: 50%;
+  }
+
+  .bar {
+    position: absolute;
+    padding: 0.3rem 0.9rem;
+    background: var(--haven-teal);
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>

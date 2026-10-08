@@ -1,0 +1,146 @@
+---
+import SignupForm from "./SignupForm.astro";
+import { event } from "../data/event";
+---
+
+<section id="top" class="hero">
+  <div class="content">
+    <img
+      class="logo"
+      src="/images/logo.webp"
+      alt="Hack Club Haven"
+      width="778"
+      height="445"
+    />
+    <h1>London</h1>
+    <p class="tagline">
+      <span>{event.tagline}</span>
+      <span>{event.dateLabel} · {event.timeLabel}</span>
+      <span class="venue">{event.venue}</span>
+    </p>
+    <div id="signup" class="signup-wrap">
+      <SignupForm id="signup-email" />
+    </div>
+  </div>
+
+  <a href="#about" class="scroll">more info ↓</a>
+
+  <img
+    class="hedgehog"
+    src="/images/hedgehog.webp"
+    alt=""
+    aria-hidden="true"
+    width="422"
+    height="308"
+  />
+  <img
+    class="foreground"
+    src="/images/hero-foreground.webp"
+    alt=""
+    aria-hidden="true"
+    width="1414"
+    height="501"
+  />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: min(100svh, 56rem);
+    padding: calc(var(--header-h) + 2rem) 1rem 10rem;
+    background: var(--haven-green) url("/images/hero-bg-no-sticky-tree.webp") top center / cover
+      no-repeat;
+    text-align: center;
+    color: #fff;
+  }
+
+  /* Haven's yellow double-rule frame, drawn inside the hero's edges. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: clamp(0.5rem, 1.1vw, 1rem);
+    top: calc(var(--header-h) - 1rem);
+    border: clamp(3px, 0.35vw, 5px) solid var(--haven-yellow);
+    border-radius: 1.5rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 40rem);
+  }
+
+  .logo {
+    width: clamp(12rem, 30vw, 24rem);
+    filter: drop-shadow(0 0 12px rgb(237 86 21 / 0.6));
+  }
+
+  h1 {
+    margin-top: -0.15em;
+    margin-bottom: 0.1em;
+    font-size: clamp(4rem, 13vw, 10rem);
+    line-height: 0.82;
+    text-shadow: 0 0 20px var(--haven-orange-deep);
+    rotate: -4deg;
+  }
+
+  .tagline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    margin: 1.5rem 0 1.75rem;
+    font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 10px var(--haven-orange-deep);
+  }
+
+  .signup-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .venue {
+    font-size: 0.8em;
+    color: var(--haven-butter);
+  }
+
+  .scroll {
+    position: absolute;
+    bottom: 3rem;
+    z-index: 3;
+    color: rgb(255 255 255 / 0.8);
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    text-decoration: none;
+  }
+
+  .hedgehog {
+    position: absolute;
+    right: 9%;
+    bottom: 0;
+    z-index: 4;
+    width: clamp(7rem, 15%, 14rem);
+    scale: -1 1;
+    pointer-events: none;
+  }
+
+  .foreground {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 3;
+    width: 100%;
+    max-width: none;
+    translate: 0 55%;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,131 @@
+---
+import { event } from "../data/event";
+
+const units = [
+  { key: "days", label: "days" },
+  { key: "hours", label: "hrs" },
+  { key: "minutes", label: "mins" },
+  { key: "seconds", label: "secs" },
+] as const;
+---
+
+<div class="countdown" data-countdown data-start={event.startsAt} data-end={event.endsAt}>
+  <p class="lead">{event.name} starts in</p>
+  <ol class="units" aria-hidden="true">
+    {
+      units.map((unit) => (
+        <li>
+          <span class="value" data-unit={unit.key}>--</span>
+          <span class="label">{unit.label}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="live" hidden>{event.name} is happening right now! 🎮</p>
+  <p class="over" hidden>That’s a wrap. Thanks for jamming with us! 🧡</p>
+  <span class="sr-only" data-countdown-sr></span>
+</div>
+
+<style>
+  .countdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--haven-orange-deep);
+    color: var(--haven-butter);
+    text-align: center;
+  }
+
+  .lead,
+  .live,
+  .over {
+    margin: 0;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+  }
+
+  .units {
+    display: flex;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .units li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+  }
+
+  .value {
+    min-width: 2ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1;
+    color: var(--haven-yellow);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .label {
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-countdown]");
+
+  if (root) {
+    const target = new Date(root.dataset.start!).getTime();
+    const end = new Date(root.dataset.end!).getTime();
+    const fields = Object.fromEntries(
+      [...root.querySelectorAll<HTMLElement>("[data-unit]")].map((el) => [el.dataset.unit, el]),
+    );
+    const sr = root.querySelector<HTMLElement>("[data-countdown-sr]")!;
+    const pad = (n: number) => String(n).padStart(2, "0");
+
+    const tick = () => {
+      const left = target - Date.now();
+
+      if (left <= 0) {
+        root.querySelector(".lead")!.setAttribute("hidden", "");
+        root.querySelector(".units")!.setAttribute("hidden", "");
+        const over = Date.now() >= end;
+        root.querySelector(".live")!.toggleAttribute("hidden", over);
+        root.querySelector(".over")!.toggleAttribute("hidden", !over);
+        sr.textContent = "";
+        if (over) clearInterval(timer);
+        return;
+      }
+
+      const s = Math.floor(left / 1000);
+      const days = Math.floor(s / 86400);
+      const hours = Math.floor((s % 86400) / 3600);
+      const minutes = Math.floor((s % 3600) / 60);
+      const seconds = s % 60;
+
+      fields.days.textContent = String(days);
+      fields.hours.textContent = pad(hours);
+      fields.minutes.textContent = pad(minutes);
+      fields.seconds.textContent = pad(seconds);
+      // Screen readers get a coarse, non-ticking summary instead of the per-second digits.
+      sr.textContent = `${days} days and ${hours} hours to go.`;
+    };
+
+    const timer = setInterval(tick, 1000);
+    tick();
+  }
+</script>

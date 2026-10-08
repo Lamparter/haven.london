@@ -1,0 +1,89 @@
+---
+import { faqs } from "../data/event";
+---
+
+<section id="faq" class="faq">
+  <div class="shell">
+    <h2>FAQ</h2>
+    <div class="list">
+      {
+        faqs.map((item) => (
+          <details name="faq">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <p class="cta">
+      <a class="button" href="#signup">sign up for Haven London</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: clamp(4rem, 8vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+    background: var(--haven-green-deep);
+  }
+
+  h2 {
+    text-align: center;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    color: #fff;
+    text-shadow: 0 0 10px var(--haven-teal);
+  }
+
+  .list {
+    display: grid;
+    gap: 0.9rem;
+    max-width: 46rem;
+    margin: 2.5rem auto 0;
+  }
+
+  details {
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, var(--haven-orange-mid), var(--haven-orange-deep));
+    color: #fff;
+    box-shadow: 0 6px 0 rgb(184 119 74 / 0.6);
+  }
+
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    letter-spacing: -0.04em;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: "▾";
+    color: var(--haven-yellow);
+    transition: rotate 0.2s;
+  }
+
+  details[open] summary::after {
+    rotate: 180deg;
+  }
+
+  details p {
+    margin: 0;
+    padding: 0 1.4rem 1.25rem;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.35;
+  }
+
+  .cta {
+    margin: 3rem 0 0;
+    text-align: center;
+  }
+</style>
