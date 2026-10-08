@@ -30,7 +30,10 @@ import { resources, sponsors, team } from "../data/event";
       {
         sponsors.map((s) => (
           <li>
-            <a href={s.href}>{s.logo ? <img src={s.logo} alt={s.name} /> : s.name}</a>
+            <a href={s.href}>
+              {s.logo ? <img src={s.logo} alt={s.name} /> <br/> : null}
+              {s.name}
+              </a>
           </li>
         ))
       }
@@ -75,7 +78,7 @@ import { resources, sponsors, team } from "../data/event";
   }
 
   .spaced {
-    margin-top: clamp(3.5rem, 7vw, 5rem);
+    margin-top: clamp(5rem, 7vw, 5rem);
   }
 
   ul {
@@ -138,7 +141,7 @@ import { resources, sponsors, team } from "../data/event";
     min-width: 12rem;
     min-height: 6rem;
     padding: 1rem 1.5rem;
-    background: rgb(255 255 255 / 0.9);
+    background: var(--haven-butter);
     border-radius: 1.2rem;
     color: var(--haven-orange-deep);
     font-size: 1.2rem;
@@ -151,14 +154,14 @@ import { resources, sponsors, team } from "../data/event";
   }
 
   .sponsors img {
-    max-height: 4rem;
+    max-height: 7rem;
     width: auto;
   }
 
   .resources {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.25rem;
+    gap: 1.75rem;
     text-align: left;
   }
 
