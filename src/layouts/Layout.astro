@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  title = `${event.name} — ${event.tagline}`,
+  title = `${event.name}`,
   description = `${event.name} is a Hack Club game jam for teens 13-18 on ${event.dateLabel}. Free food, workshops and new friends.`,
 } = Astro.props;
 ---
@@ -23,7 +23,6 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
