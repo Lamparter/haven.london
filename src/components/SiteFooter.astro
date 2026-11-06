@@ -1,5 +1,7 @@
 ---
 import Skyline from "./Skyline.astro";
+import SignupForm from "./SignupForm.astro";
+import { event } from "../data/event";
 
 const links = [
   { href: "https://hackclub.com", label: "Hack Club" },
@@ -11,9 +13,17 @@ const links = [
 
 <div class="skyline-wrap"><Skyline /></div>
 <footer class="footer">
-  <div class="shell inner">
-    <div>
-      <img src="/images/logo.webp" alt="Hack Club Haven" width="778" height="445" class="logo" />
+  <div class="shell">
+    <div class="cta">
+      <h2>Don't miss out!</h2>
+      <p>{event.dateLabel} · {event.venueShort}</p>
+      <SignupForm id="footer-signup-email" />
+    </div>
+
+    <div class="inner">
+      <div>
+        <img src="/images/logo.webp" alt="Hack Club Haven" width="762" height="491" class="logo" />
+      </div>
       <nav aria-label="Hack Club">
         <ul>
           {
@@ -25,48 +35,74 @@ const links = [
           }
         </ul>
       </nav>
-    </div>
-    <div class="body">
-      <p>
-        Haven London is part of Hack Club Haven, a global game jam for teens in 200+ cities. Hack
-        Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers.
-      </p>
-      <p>Made with 🧡 in London.</p>
+      <div class="body">
+        <p>
+          Haven London is part of Hack Club Haven, a global game jam for teens in 200+ cities. Hack
+          Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers.
+        </p>
+        <p>
+          Questions? <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a>
+        </p>
+        <p>Made with 💛 by <a href="https://instagram.com/lamparter">Lamparter</a>.</p>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
-  .footer {
-    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
-    background: var(--haven-orange-deep);
-    color: #fff;
-  }
-
   .skyline-wrap {
     background: var(--haven-green-deep);
   }
 
+  .footer {
+    padding: clamp(1rem, 3vw, 2rem) 0 clamp(2.5rem, 5vw, 4rem);
+    background: var(--haven-orange-deep);
+    color: #fff;
+  }
+
+  .cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    border-bottom: 2px dashed rgb(255 255 255 / 0.35);
+    text-align: center;
+  }
+
+  h2 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    text-shadow: 0 0.06em 0 #b83f0b;
+    rotate: -2deg;
+  }
+
+  .cta p {
+    margin: 0.9rem 0 1.5rem;
+    font-size: 1.15rem;
+    color: var(--haven-butter);
+  }
+
   .inner {
     display: grid;
-    gap: clamp(2rem, 5vw, 4rem);
+    gap: 2rem;
+    padding-top: clamp(2.5rem, 5vw, 3.5rem);
   }
 
   @media (width >= 48rem) {
     .inner {
-      grid-template-columns: minmax(0, 18rem) 1fr;
+      grid-template-columns: auto auto 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
     }
   }
 
   .logo {
-    width: clamp(6rem, 18vw, 10rem);
+    width: clamp(7rem, 16vw, 9.5rem);
   }
 
   ul {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 1.5rem;
-    margin: 1.5rem 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -92,11 +128,16 @@ const links = [
   .body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    line-height: 1.4;
+    gap: 0.8rem;
+    max-width: 32rem;
+    line-height: 1.45;
   }
 
   .body p {
     margin: 0;
+  }
+
+  .body a {
+    color: var(--haven-butter);
   }
 </style>
