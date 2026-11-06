@@ -38,10 +38,16 @@ const initials = (name: string) =>
         {
           sponsors.map((s) => (
             <li>
-              <a href={s.href}>
-                {s.logo && <img src={s.logo} alt="" />}
-                <span>{s.name}</span>
-              </a>
+              {s.logo && s.logoHasName ? (
+                <a href={s.href} class="logo-only">
+                  <img src={s.logo} alt={s.name} />
+                </a>
+              ) : (
+                <a href={s.href}>
+                  {s.logo && <img src={s.logo} alt="" />}
+                  <span>{s.name}</span>
+                </a>
+              )}
             </li>
           ))
         }
@@ -171,5 +177,20 @@ const initials = (name: string) =>
     height: 4rem;
     object-fit: contain;
     border-radius: 0.6rem;
+  }
+
+  /* Wordmark logos carry the name themselves, so they get the whole card. */
+  .sponsors .logo-only {
+    justify-content: center;
+    min-width: 10rem;
+    height: 5.5rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .sponsors .logo-only img {
+    width: auto;
+    max-width: 9rem;
+    height: 100%;
+    border-radius: 0.4rem;
   }
 </style>

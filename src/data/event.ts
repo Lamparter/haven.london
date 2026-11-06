@@ -83,14 +83,14 @@ export const venue = {
   ],
 };
 
-export const sponsors = [
+export const sponsors: { name: string; href: string; logo: string | null; logoHasName?: boolean }[] = [
   { name: "Ada College", href: "https://ada.ac.uk", logo: "/images/sponsors/ada.webp" },
   { name: "ElevenLabs", href: "https://elevenlabs.io", logo: "/images/sponsors/elevenlabs.webp" },
-  { name: "PCBWay", href: "https://www.pcbway.com", logo: "/images/sponsors/pcbway.webp" },
-  { name: "Kitronik", href: "https://kitronik.co.uk", logo: "/images/sponsors/kitronik.webp" },
+  { name: "PCBWay", href: "https://www.pcbway.com", logo: "/images/sponsors/pcbway.webp", logoHasName: true },
+  { name: "Kitronik", href: "https://kitronik.co.uk", logo: "/images/sponsors/kitronik.webp", logoHasName: true },
   { name: "GenXYZ", href: "https://gen.xyz", logo: "/images/sponsors/xyz.webp" },
   { name: "Sakura Box", href: "https://www.sakurabox.com/en-gb", logo: "/images/sponsors/sakura.webp" },
-  { name: "Mr. Wang Hot Pot", href: "https://www.mrwanghotpotuk.co.uk", logo: "/images/sponsors/hotpot.webp" },
+  { name: "Mr. Wang Hot Pot", href: "https://www.mrwanghotpotuk.co.uk", logo: "/images/sponsors/hotpot.webp", logoHasName: true },
   { name: "Mongoose Publishing", href: "https://www.mongoosepublishing.com", logo: "/images/sponsors/mongoose.webp" },
   { name: "Free Lives", href: "https://freelives.net", logo: "/images/sponsors/freelives.webp" },
 ];
