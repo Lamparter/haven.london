@@ -9,21 +9,23 @@ import { event } from "../data/event";
       class="logo"
       src="/images/logo.webp"
       alt="Hack Club Haven"
-      width="778"
-      height="445"
+      width="762"
+      height="491"
     />
     <h1>London</h1>
-    <p class="tagline">
-      <span>{event.tagline}</span>
-      <span>{event.dateLabel} · {event.timeLabel}</span>
-      <span class="venue">{event.venue}</span>
-    </p>
+    <p class="tagline">{event.tagline}</p>
+    <ul class="facts">
+      <li><span aria-hidden="true">📅</span> {event.dateLabel}</li>
+      <li><span aria-hidden="true">⏰</span> {event.timeLabel}</li>
+      <li><span aria-hidden="true">📍</span> {event.venueShort}</li>
+    </ul>
     <div id="signup" class="signup-wrap">
       <SignupForm id="signup-email" />
     </div>
+    <p class="free">Free to attend, food included. No experience needed.</p>
   </div>
 
-  <a href="#about" class="scroll">more info ↓</a>
+  <a href="#about" class="scroll">more info <span aria-hidden="true">↓</span></a>
 
   <img
     class="hedgehog"
@@ -46,27 +48,28 @@ import { event } from "../data/event";
 <style>
   .hero {
     position: relative;
-    isolation: isolate;
+    /* Sits above the next section so the foliage strip can spill over the seam. */
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: min(100svh, 56rem);
-    padding: calc(var(--header-h) + 2rem) 1rem 10rem;
+    min-height: min(100svh, 58rem);
+    padding: calc(var(--header-h) + 2rem) 1rem 9rem;
     background: var(--haven-green) url("/images/hero-bg-no-sticky-tree.webp") top center / cover
       no-repeat;
     text-align: center;
     color: #fff;
   }
 
-  /* Haven's yellow double-rule frame, drawn inside the hero's edges. */
+  /* Haven's yellow frame, drawn inside the hero's edges and below the nav. */
   .hero::before {
     content: "";
     position: absolute;
-    inset: clamp(0.5rem, 1.1vw, 1rem);
-    top: calc(var(--header-h) - 1rem);
+    inset: calc(var(--header-h) + 0.25rem) clamp(0.5rem, 1.1vw, 1rem) 0;
     border: clamp(3px, 0.35vw, 5px) solid var(--haven-yellow);
-    border-radius: 1.5rem;
+    border-bottom: 0;
+    border-radius: 1.5rem 1.5rem 0 0;
     pointer-events: none;
     z-index: 1;
   }
@@ -77,31 +80,57 @@ import { event } from "../data/event";
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(100%, 40rem);
+    width: min(100%, 42rem);
   }
 
   .logo {
-    width: clamp(12rem, 30vw, 24rem);
+    width: clamp(11rem, 26vw, 21rem);
     filter: drop-shadow(0 0 12px rgb(237 86 21 / 0.6));
+    animation: bob 5s ease-in-out infinite;
   }
 
   h1 {
-    margin-top: -0.15em;
-    margin-bottom: 0.1em;
-    font-size: clamp(4rem, 13vw, 10rem);
+    margin-top: -0.1em;
+    font-size: clamp(4.5rem, 14vw, 10.5rem);
     line-height: 0.82;
-    text-shadow: 0 0 20px var(--haven-orange-deep);
+    text-shadow:
+      0 0.05em 0 var(--haven-orange-deep),
+      0 0 0.35em rgb(237 86 21 / 0.55);
     rotate: -4deg;
   }
 
   .tagline {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3em;
-    margin: 1.5rem 0 1.75rem;
-    font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+    margin: 2rem 0 0;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
     letter-spacing: -0.03em;
-    text-shadow: 0 0 10px var(--haven-orange-deep);
+    text-shadow: 0 0.08em 0 var(--haven-orange-deep);
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.1rem 0 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .facts li {
+    padding: 0.35rem 0.85rem;
+    background: rgb(255 246 220 / 0.92);
+    border-radius: 999px;
+    color: var(--haven-orange-deep);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    box-shadow: 0 0.2rem 0 rgb(237 86 21 / 0.35);
+  }
+
+  .facts li:nth-child(odd) {
+    rotate: -1.5deg;
+  }
+
+  .facts li:nth-child(even) {
+    rotate: 1.5deg;
   }
 
   .signup-wrap {
@@ -110,26 +139,37 @@ import { event } from "../data/event";
     width: 100%;
   }
 
-  .venue {
-    font-size: 0.8em;
-    color: var(--haven-butter);
+  .free {
+    margin: 0.9rem 0 0;
+    font-size: 1rem;
+    color: var(--haven-cream);
+    text-shadow: 0 0 6px rgb(237 86 21 / 0.9);
   }
 
   .scroll {
     position: absolute;
-    bottom: 3rem;
-    z-index: 3;
-    color: rgb(255 255 255 / 0.8);
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    bottom: 4.5rem;
+    z-index: 5;
+    padding: 0.3rem 0.9rem;
+    background: rgb(237 86 21 / 0.85);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 1rem;
     text-decoration: none;
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  .scroll:hover {
+    transform: translateY(3px);
   }
 
   .hedgehog {
     position: absolute;
     right: 9%;
-    bottom: 0;
-    z-index: 4;
-    width: clamp(7rem, 15%, 14rem);
+    /* Tucked behind the foliage strip, which hides the flat bottom edge of the art. */
+    bottom: -1.5%;
+    z-index: 2;
+    width: clamp(6rem, 15%, 14rem);
     scale: -1 1;
     pointer-events: none;
   }
@@ -140,7 +180,23 @@ import { event } from "../data/event";
     z-index: 3;
     width: 100%;
     max-width: none;
-    translate: 0 55%;
+    translate: 0 52%;
     pointer-events: none;
+  }
+
+  @keyframes bob {
+    50% {
+      translate: 0 -6px;
+    }
+  }
+
+  @media (width < 40rem) {
+    .hedgehog {
+      right: 4%;
+    }
+
+    .scroll {
+      display: none;
+    }
   }
 </style>

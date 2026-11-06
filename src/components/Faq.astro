@@ -1,10 +1,52 @@
 ---
-import { faqs } from "../data/event";
+import Roundel from "./Roundel.astro";
+import { event, faqs, resources } from "../data/event";
 ---
 
-<section id="faq" class="faq">
-  <div class="shell">
-    <h2>FAQ</h2>
+<section id="faq" class="faq wavy">
+  <div class="shell layout">
+    <div class="aside">
+      <Roundel label="Help point" />
+      <h2 class="title">Questions?</h2>
+      <p class="sub">
+        Still stuck? Email <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a>.
+      </p>
+
+      <h3 id="resources">Resources</h3>
+      <ul class="resources">
+        {
+          resources.map((r) =>
+            r.href ? (
+              <li>
+                <a class="resource" href={r.href} target="_blank" rel="noopener">
+                  <span class="icon" aria-hidden="true">
+                    {r.icon}
+                  </span>
+                  <span>
+                    <strong>{r.title} ↗</strong>
+                    <span class="blurb">{r.blurb}</span>
+                  </span>
+                </a>
+              </li>
+            ) : (
+              <li>
+                <div class="resource soon">
+                  <span class="icon" aria-hidden="true">
+                    {r.icon}
+                  </span>
+                  <span>
+                    <strong>{r.title}</strong>
+                    <span class="blurb">{r.blurb}</span>
+                    <span class="tag">coming soon</span>
+                  </span>
+                </div>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </div>
+
     <div class="list">
       {
         faqs.map((item) => (
@@ -15,37 +57,132 @@ import { faqs } from "../data/event";
         ))
       }
     </div>
-    <p class="cta">
-      <a class="button" href="#signup">sign up for Haven London</a>
-    </p>
   </div>
 </section>
 
 <style>
   .faq {
-    padding: clamp(4rem, 8vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+    padding-bottom: clamp(3rem, 6vw, 4rem);
     background: var(--haven-green-deep);
   }
 
-  h2 {
-    text-align: center;
-    font-size: clamp(3.5rem, 8vw, 6rem);
+  .layout {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (width >= 56rem) {
+    .layout {
+      grid-template-columns: minmax(0, 22rem) 1fr;
+      align-items: start;
+    }
+
+    .aside {
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+    }
+  }
+
+  .title {
+    --title-shadow: var(--haven-green-dark);
+    margin-top: 1rem;
+  }
+
+  .sub {
     color: #fff;
-    text-shadow: 0 0 10px var(--haven-teal);
+  }
+
+  .sub a {
+    color: var(--haven-butter);
+  }
+
+  h3 {
+    margin-top: 2.25rem;
+    font-size: 1.8rem;
+    color: var(--haven-butter);
+  }
+
+  .resources {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .resource {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+    background: var(--haven-butter);
+    border-radius: 1.1rem;
+    box-shadow: 0 0.3rem 0 var(--haven-green-dark);
+    color: var(--haven-bark);
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  a.resource:hover {
+    transform: translateY(-3px) rotate(-0.5deg);
+  }
+
+  .soon {
+    background: transparent;
+    border: 2px dashed var(--haven-butter);
+    box-shadow: none;
+    color: #fff;
+  }
+
+  .soon strong {
+    color: var(--haven-butter);
+  }
+
+  .icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.4rem;
+    letter-spacing: -0.04em;
+    color: var(--haven-orange-deep);
+  }
+
+  .blurb {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .tag {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.05rem 0.55rem;
+    background: var(--haven-orange-mid);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.8rem;
   }
 
   .list {
     display: grid;
     gap: 0.9rem;
-    max-width: 46rem;
-    margin: 2.5rem auto 0;
   }
 
   details {
     border-radius: 1.25rem;
-    background: linear-gradient(135deg, var(--haven-orange-mid), var(--haven-orange-deep));
-    color: #fff;
-    box-shadow: 0 6px 0 rgb(184 119 74 / 0.6);
+    background: var(--haven-cream);
+    box-shadow: 0 0.35rem 0 var(--haven-green-dark);
+    transition: background-color 0.2s;
+  }
+
+  details[open] {
+    background: #fff;
   }
 
   summary {
@@ -53,12 +190,13 @@ import { faqs } from "../data/event";
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 1.1rem 1.4rem;
+    padding: 1.15rem 1.4rem;
     cursor: pointer;
     list-style: none;
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
     letter-spacing: -0.04em;
+    color: var(--haven-orange-deep);
   }
 
   summary::-webkit-details-marker {
@@ -66,24 +204,29 @@ import { faqs } from "../data/event";
   }
 
   summary::after {
-    content: "▾";
-    color: var(--haven-yellow);
-    transition: rotate 0.2s;
+    content: "+";
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    aspect-ratio: 1;
+    background: var(--haven-orange-deep);
+    border-radius: 50%;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: rotate 0.25s var(--ease-bounce);
   }
 
   details[open] summary::after {
-    rotate: 180deg;
+    rotate: 45deg;
   }
 
   details p {
     margin: 0;
-    padding: 0 1.4rem 1.25rem;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    line-height: 1.35;
-  }
-
-  .cta {
-    margin: 3rem 0 0;
-    text-align: center;
+    padding: 0 1.4rem 1.3rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.45;
   }
 </style>

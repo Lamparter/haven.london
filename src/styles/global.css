@@ -2,21 +2,27 @@
 :root {
   --font-display: "Darumadrop One", "Jua", ui-rounded, system-ui, sans-serif;
   --font-body: "Jua", ui-rounded, system-ui, sans-serif;
+  --font-board: "Doto", ui-monospace, monospace;
 
   --haven-green: #b8c220;
   --haven-green-deep: #97a01a;
+  --haven-green-dark: #6f7612;
   --haven-orange-deep: #ed5615;
   --haven-orange-bright: #fa681b;
   --haven-orange-mid: #fc8616;
   --haven-yellow: #ffd059;
   --haven-butter: #ffe382;
+  --haven-cream: #fff6dc;
   --haven-gold: #fba71f;
   --haven-brown-dark: #b8774a;
   --haven-brown-light: #dda47d;
+  --haven-bark: #6b3414;
   --haven-teal: #2cbf90;
 
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --header-h: 7.5rem;
+  --wave-h: clamp(1.25rem, 2.5vw, 2rem);
+  --section-pad: clamp(4rem, 8vw, 6.5rem);
 }
 
 *,
@@ -32,9 +38,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--haven-green);
+  /* Matches the countdown bar and footer, so overscroll at either end blends in. */
+  background: var(--haven-orange-deep);
   font-family: var(--font-body);
-  color: var(--haven-orange-deep);
+  color: var(--haven-bark);
   overflow-x: clip;
 }
 
@@ -52,6 +59,11 @@ h3 {
   letter-spacing: -0.05em;
   line-height: 0.9;
   margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
@@ -67,6 +79,40 @@ a {
 .shell {
   width: min(100% - 2rem, 72rem);
   margin-inline: auto;
+}
+
+/* A bushy top edge, so each section grows out of the one above instead of meeting it at a hard line. */
+.wavy {
+  position: relative;
+  margin-top: calc(var(--wave-h) * -1);
+  padding-top: calc(var(--section-pad) + var(--wave-h));
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' preserveAspectRatio='none'%3E%3Cpath d='M0 24V14C8 4 22 2 30 10C38 0 56 0 62 10C70 4 84 2 92 10C100 2 114 4 120 14V24z'/%3E%3C/svg%3E");
+  -webkit-mask:
+    var(--wave) top left / calc(var(--wave-h) * 5) var(--wave-h) repeat-x,
+    linear-gradient(#000 0 0) left var(--wave-h) / 100% 100% no-repeat;
+  mask:
+    var(--wave) top left / calc(var(--wave-h) * 5) var(--wave-h) repeat-x,
+    linear-gradient(#000 0 0) left var(--wave-h) / 100% 100% no-repeat;
+}
+
+/* Big section titles: white with a solid "sticker" drop rather than a blurry glow. */
+.title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: #fff;
+  text-shadow:
+    0 0.06em 0 var(--title-shadow, var(--haven-orange-deep)),
+    0 0.12em 0.2em rgb(0 0 0 / 0.12);
+}
+
+.title.on-light {
+  color: var(--haven-orange-deep);
+  text-shadow: 0 0.06em 0 var(--haven-yellow);
+}
+
+.sub {
+  margin: 1rem 0 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.4;
 }
 
 .marker {
@@ -88,16 +134,29 @@ a {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   letter-spacing: -0.03em;
   text-decoration: none;
-  box-shadow: 0 0 12px rgb(237 86 21 / 0.5);
-  transition: transform 0.2s var(--ease-bounce);
+  box-shadow: 0 0.3rem 0 #b83f0b;
+  transition:
+    transform 0.2s var(--ease-bounce),
+    box-shadow 0.2s;
 }
 
 .button:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 0.45rem 0 #b83f0b;
 }
 
 .button:active {
-  transform: scale(1);
+  transform: translateY(0.2rem);
+  box-shadow: 0 0.1rem 0 #b83f0b;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: reduce) {

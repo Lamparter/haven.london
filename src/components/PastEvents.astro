@@ -3,21 +3,26 @@ import Roundel from "./Roundel.astro";
 import { pastEvents } from "../data/event";
 ---
 
-<section id="past" class="past">
+<section id="past" class="past wavy">
   <div class="shell">
     <Roundel label="Past stops" />
-    <h2>We've jammed in London before</h2>
+    <h2 class="title">We've jammed in London before</h2>
     <p class="sub">Here's what happened last time, and what people shipped.</p>
 
+    <!-- Pinned up like polaroids on a corkboard, each one at its own slight angle. -->
     <ul class="events">
       {
         pastEvents.map((e) => (
           <li class="card">
-            <div class="photos">
+            <span class="tape" aria-hidden="true" />
+            <div class="photo">
               {e.photos.length ? (
-                e.photos.slice(0, 2).map((p) => <img src={p.src} alt={p.alt} loading="lazy" />)
+                <img src={e.photos[0].src} alt={e.photos[0].alt} loading="lazy" />
               ) : (
-                <p class="placeholder">photos coming soon 📸</p>
+                <p class="placeholder">
+                  <span aria-hidden="true">🎮</span>
+                  photos coming soon
+                </p>
               )}
             </div>
             <div class="body">
@@ -51,79 +56,109 @@ import { pastEvents } from "../data/event";
 
 <style>
   .past {
-    padding: clamp(4rem, 8vw, 6rem) 0;
+    padding-bottom: calc(var(--section-pad) + var(--wave-h));
     background: linear-gradient(var(--haven-orange-mid), var(--haven-orange-deep));
     text-align: center;
     color: #fff;
   }
 
-  /* The roundel ring would vanish on orange, so swap it to yellow here. */
-  .past :global(.ring) {
-    border-color: var(--haven-yellow);
-  }
-
-  h2 {
-    margin-top: 0.5rem;
-    font-size: clamp(2.25rem, 5.5vw, 4rem);
+  .past .title {
+    --title-shadow: #b83f0b;
   }
 
   .sub {
-    margin: 0.75rem 0 2.5rem;
-    font-size: 1.15rem;
     color: var(--haven-butter);
   }
 
   .events {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.25rem;
-    margin: 0;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: clamp(2rem, 4vw, 2.75rem);
+    margin: 3rem 0 0;
     padding: 0;
     list-style: none;
     text-align: left;
   }
 
   .card {
-    overflow: hidden;
+    position: relative;
+    padding: 0.8rem 0.8rem 0;
     background: #fff;
-    border-radius: 1.2rem;
-    color: var(--haven-brown-dark);
-    transition: transform 0.25s var(--ease-bounce);
+    border-radius: 0.4rem;
+    color: var(--haven-bark);
+    box-shadow: 0 0.75rem 1.5rem rgb(107 52 20 / 0.3);
+    rotate: -2deg;
+    transition:
+      rotate 0.3s var(--ease-bounce),
+      scale 0.3s var(--ease-bounce);
   }
 
-  .card:nth-child(odd):hover {
-    transform: rotate(-1.5deg) scale(1.02);
+  .card:nth-child(3n + 2) {
+    rotate: 1.5deg;
+    margin-top: 1.25rem;
   }
 
-  .card:nth-child(even):hover {
-    transform: rotate(1.5deg) scale(1.02);
+  .card:nth-child(3n) {
+    rotate: -0.75deg;
   }
 
-  .photos {
+  .card:hover {
+    rotate: 0deg;
+    scale: 1.03;
+  }
+
+  .tape {
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    z-index: 1;
+    width: 6rem;
+    height: 1.7rem;
+    translate: -50% 0;
+    rotate: 3deg;
+    background: rgb(255 227 130 / 0.85);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+  }
+
+  .photo {
     display: grid;
-    grid-auto-flow: column;
-    aspect-ratio: 16 / 9;
-    background: var(--haven-butter);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--haven-butter) 0 1rem,
+      var(--haven-yellow) 1rem 2rem
+    );
   }
 
-  .photos img {
+  .photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
   .placeholder {
+    display: grid;
+    gap: 0.4rem;
+    place-items: center;
     margin: 0;
     place-self: center;
-    color: var(--haven-brown-dark);
+    padding: 0.8rem 1.2rem;
+    background: var(--haven-cream);
+    border-radius: 1rem;
+    color: var(--haven-bark);
+  }
+
+  .placeholder span {
+    font-size: 2.2rem;
   }
 
   .body {
-    padding: 1.25rem 1.4rem 1.5rem;
+    padding: 1.1rem 0.5rem 1.4rem;
   }
 
   h3 {
-    font-size: 1.9rem;
+    font-size: 2rem;
   }
 
   h3 a {
@@ -132,16 +167,18 @@ import { pastEvents } from "../data/event";
   }
 
   h3 a:hover {
-    text-decoration: underline;
+    text-decoration: underline wavy;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 2px;
   }
 
   .meta {
     margin: 0.4rem 0 0;
-    color: var(--haven-teal);
+    color: #1f9a73;
   }
 
   .body p {
-    line-height: 1.35;
+    line-height: 1.4;
   }
 
   h4 {
