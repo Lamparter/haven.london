@@ -145,7 +145,7 @@ export const pastEvents = [
     where: "Ada College",
     blurb: "A one-day game jam where teams built and published games on itch.io.",
     href: "https://daydream.hackclub.com/london",
-    photos: [] as { src: string; alt: string }[],
+    photos: [{ src: "/images/past/daydream-1.webp", alt: "Daydream London participants in the lecture theatre at Ada College" }] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
   }
 ];
