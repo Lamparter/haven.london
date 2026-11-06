@@ -68,6 +68,13 @@ export const venue = {
 export const sponsors = [
   { name: "Ada College", href: "https://ada.ac.uk", logo: "/images/sponsors/ada.webp" },
   { name: "ElevenLabs", href: "https://elevenlabs.io", logo: "/images/sponsors/elevenlabs.webp" },
+  { name: "PCBWay", href: "https://www.pcbway.com", logo: "/images/sponsors/pcbway.webp" },
+  { name: "Kitronik", href: "https://kitronik.co.uk", logo: "/images/sponsors/kitronik.webp" },
+  { name: "GenXYZ", href: "https://gen.xyz", logo: "/images/sponsors/xyz.webp" },
+  { name: "Sakura Box", href: "https://www.sakurabox.com/en-gb", logo: "/images/sponsors/sakura.webp" },
+  { name: "Mr. Wang Hot Pot", href: "https://www.mrwanghotpotuk.co.uk", logo: "/images/sponsors/hotpot.webp" },
+  { name: "Mongoose Publishing", href: "https://www.mongoosepublishing.com", logo: "/images/sponsors/mongoose.webp" },
+  { name: "Free Lives", href: "https://freelives.net", logo: "/images/sponsors/freelives.webp" },
 ];
 
 export const team = [
@@ -75,7 +82,7 @@ export const team = [
   { name: "Jupiter F", role: null as string | null, photo: "/images/team/lamparter.webp" },
   { name: "Nirvaan T", role: null as string | null, photo: "/images/team/duckida.webp" },
   { name: "Nihaal S", role: null as string | null, photo: null as string | null },
-  { name: "Arca C", role: null as string | null, photo: "/images/team/arc.webp" },
+  // { name: "Arca C", role: null as string | null, photo: "/images/team/arc.webp" },
   { name: "Derek Y", role: null as string | null, photo: "/images/team/derekyuan100.webp" },
 ];
 
