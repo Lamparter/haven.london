@@ -127,7 +127,12 @@ export const pastEvents = [
     where: "Hackney Depot",
     blurb: "A free social coding event for girls aged 13-18.",
     href: "https://sunbeam.hackclub.com/london",
-    photos: [{ src: "/images/past/sunbeam-1.webp", alt: "Sunbeam London organisers group selfie" }] as { src: string; alt: string }[],
+    photos: [
+      { src: "/images/past/sunbeam-1.webp", alt: "Sunbeam London organisers group selfie" },
+      { src: "/images/past/sunbeam-2.webp", alt: "Sunbeam London organiser running a workshop" },
+      { src: "/images/past/sunbeam-3.webp", alt: "Sunbeam London participants group selfie" },
+      { src: "/images/past/sunbeam-4.webp", alt: "Sunbeam London participants group selfie" },
+    ] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
   },
   {
@@ -136,7 +141,10 @@ export const pastEvents = [
     where: "Ada College",
     blurb: "Part of Campfire, Hack Club's largest game jam: 10k teens making games in one weekend.",
     href: "https://campfire.hackclub.com/london",
-    photos: [{ src: "/images/past/campfire-1.webp", alt: "Campfire London participants on the rooftop of Ada College" }] as { src: string; alt: string }[],
+    photos: [
+      { src: "/images/past/campfire-1.webp", alt: "Campfire London participants on the rooftop of Ada College" },
+      { src: "/images/past/campfire-2.webp", alt: "Campfire London organisers group selfie" },
+    ] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
   },
   {
@@ -145,7 +153,10 @@ export const pastEvents = [
     where: "Ada College",
     blurb: "A one-day game jam where teams built and published games on itch.io.",
     href: "https://daydream.hackclub.com/london",
-    photos: [{ src: "/images/past/daydream-1.webp", alt: "Daydream London participants in the lecture theatre at Ada College" }] as { src: string; alt: string }[],
+    photos: [
+      { src: "/images/past/daydream-1.webp", alt: "Daydream London participants in the lecture theatre at Ada College" },
+      { src: "/images/past/daydream-2.webp", alt: "Daydream London organisers setting up for lunch" },
+    ] as { src: string; alt: string }[],
     projects: [] as { title: string; href: string; by?: string }[],
   }
 ];

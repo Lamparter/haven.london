@@ -1,6 +1,16 @@
 ---
 import Roundel from "./Roundel.astro";
 import { pastEvents } from "../data/event";
+
+// Every photo from every past event, captioned with where it came from, in a random order.
+const reel = pastEvents
+  .flatMap((e) => e.photos.map((p) => ({ ...p, event: e.name })))
+  .sort(() => Math.random() - 0.5);
+// Repeat short reels so one copy is always wider than the screen, then double it for a seamless loop.
+// Each half needs an even count, or the alternating tilt would jump where the halves meet.
+let copies = reel.length ? Math.ceil(10 / reel.length) : 0;
+if ((copies * reel.length) % 2) copies++;
+const strip = Array.from({ length: copies }, () => reel).flat();
 ---
 
 <section id="past" class="past wavy">
@@ -52,6 +62,23 @@ import { pastEvents } from "../data/event";
       }
     </ul>
   </div>
+
+  {
+    strip.length > 0 && (
+      <div class="reel" role="group" aria-label="Photos from past events">
+        <ul class="track">
+          {[0, 1].map((copy) =>
+            strip.map((p, i) => (
+              <li aria-hidden={copy === 1 || i >= reel.length ? "true" : undefined}>
+                <img src={p.src} alt={copy === 0 && i < reel.length ? p.alt : ""} loading="lazy" />
+                <span>{p.event}</span>
+              </li>
+            )),
+          )}
+        </ul>
+      </div>
+    )
+  }
 </section>
 
 <style>
@@ -168,7 +195,7 @@ import { pastEvents } from "../data/event";
 
   h3 a:hover {
     text-decoration: underline wavy;
-    text-underline-offset: 0.15em;
+    text-underline-offset: 0.05em;
     text-decoration-thickness: 2px;
   }
 
@@ -192,5 +219,79 @@ import { pastEvents } from "../data/event";
   .projects {
     margin: 0;
     padding-left: 1.2rem;
+  }
+
+  /* A full-width strip of photos drifting past, like a reel of snapshots. */
+  .reel {
+    margin-top: clamp(3.5rem, 7vw, 5rem);
+    padding: 1.5rem 0;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: reel 60s linear infinite;
+  }
+
+  .reel:hover .track {
+    animation-play-state: paused;
+  }
+
+  .track li {
+    flex: none;
+    padding: 0.5rem 0.5rem 0.4rem;
+    background: #fff;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.5rem 1rem rgb(107 52 20 / 0.3);
+    rotate: -2deg;
+    transition: rotate 0.3s var(--ease-bounce);
+  }
+
+  .track li:nth-child(even) {
+    rotate: 2deg;
+    translate: 0 0.75rem;
+  }
+
+  .track li:hover {
+    rotate: 0deg;
+  }
+
+  .track img {
+    width: auto;
+    height: clamp(9rem, 18vw, 13rem);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .track span {
+    display: block;
+    padding-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--haven-bark);
+  }
+
+  /* The track holds two identical halves, so sliding by one half loops seamlessly. */
+  @keyframes reel {
+    to {
+      translate: calc(-50% - 0.75rem) 0;
+    }
+  }
+
+  /* With motion off, the reel stays put and can be scrolled by hand instead. */
+  @media (prefers-reduced-motion: reduce) {
+    .reel {
+      overflow-x: auto;
+    }
+
+    .track {
+      animation: none;
+    }
   }
 </style>
