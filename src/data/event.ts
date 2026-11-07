@@ -9,7 +9,7 @@ export const event = {
   startsAt: "2026-11-14T09:00:00Z",
   endsAt: "2026-11-14T20:00:00Z",
   venue: "Ada, the National College for Digital Skills",
-  venueShort: "Ada College, Pimlico",
+  venueShort: "Ada, the National College for Digital Skills",
   parentGuideUrl:
     "https://docs.google.com/document/d/1o0IIxcglfIlBbyfnIONJiUj8o4oxToQYWQRMnnJKzkA",
   contactEmail: "london@haven.hackclub.com",
@@ -88,7 +88,7 @@ export const venue = {
 };
 
 export const sponsors: { name: string; href: string; logo: string | null; logoHasName?: boolean }[] = [
-  { name: "Ada College", href: "https://ada.ac.uk", logo: "/images/sponsors/ada.webp" },
+  { name: "Ada College", href: "https://ada.ac.uk", logo: "/images/sponsors/ada.webp", logoHasName: true  },
   { name: "ElevenLabs", href: "https://elevenlabs.io", logo: "/images/sponsors/elevenlabs.webp" },
   { name: "PCBWay", href: "https://www.pcbway.com", logo: "/images/sponsors/pcbway.webp", logoHasName: true },
   { name: "Kitronik", href: "https://kitronik.co.uk", logo: "/images/sponsors/kitronik.webp", logoHasName: true },
@@ -142,7 +142,7 @@ export const pastEvents = [
   {
     name: "Campfire London",
     date: "28 February 2026",
-    where: "Ada College",
+    where: "Ada, the National College for Digital Skills",
     blurb: "Part of Campfire, Hack Club's largest game jam: 10k teens making games in one weekend.",
     href: "https://campfire.hackclub.com/london",
     photos: [
@@ -154,7 +154,7 @@ export const pastEvents = [
   {
     name: "Daydream London",
     date: "28 September 2025",
-    where: "Ada College",
+    where: "Ada, the National College for Digital Skills",
     blurb: "A one-day game jam where teams built and published games on itch.io.",
     href: "https://daydream.hackclub.com/london",
     photos: [
