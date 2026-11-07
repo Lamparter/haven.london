@@ -14,11 +14,13 @@ import { event } from "../data/event";
     />
     <h1>London</h1>
     <p class="tagline">{event.tagline}</p>
-    <ul class="facts">
-      <li><span aria-hidden="true">📅</span> {event.dateLabel}</li>
-      <li><span aria-hidden="true">⏰</span> {event.timeLabel}</li>
-      <li><span aria-hidden="true">📍</span> {event.venueShort}</li>
-    </ul>
+    <a class="no-underline" href="#venue">
+      <ul class="facts">
+        <li><span aria-hidden="true">📅</span> {event.dateLabel}</li>
+        <li><span aria-hidden="true">⏰</span> {event.timeLabel}</li>
+        <li><span aria-hidden="true">📍</span> {event.venueShort}</li>
+      </ul>
+    </a>
     <div id="signup" class="signup-wrap">
       <SignupForm id="signup-email" />
     </div>
@@ -123,6 +125,12 @@ import { event } from "../data/event";
     color: var(--haven-orange-deep);
     font-size: clamp(0.95rem, 1.6vw, 1.1rem);
     box-shadow: 0 0.2rem 0 rgb(237 86 21 / 0.35);
+    transition: transform 0.2s var(--ease-bounce);
+  }
+
+  .facts li:hover {
+    cursor: pointer;
+    transform: scale(1.03);
   }
 
   .facts li:nth-child(odd) {
@@ -131,6 +139,10 @@ import { event } from "../data/event";
 
   .facts li:nth-child(even) {
     rotate: 1.5deg;
+  }
+
+  .no-underline {
+    text-decoration: none;
   }
 
   .signup-wrap {

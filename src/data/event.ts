@@ -73,7 +73,11 @@ export const scheduleNote =
 export const venue = {
   name: event.venue,
   address: "1 Sutherland St, Pimlico, London SW1V 4LD",
-  travel: [{ line: "Victoria", station: "Victoria" }, { line: "Victoria", station: "Pimlico" }, { line: "Circle", station: "Sloane Square" }] as { line: string; station: string; note?: string }[],
+  travel: [
+    { station: "Victoria", lines: ["Victoria", "Circle", "District"] },
+    { station: "Pimlico", lines: ["Victoria"] },
+    { station: "Sloane Square", lines: ["Circle", "District"] },
+  ] as { station: string; lines: string[]; note?: string }[],
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.302427537281!2d-0.1497113222096472!3d51.489317471809414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761c3b9c336b35%3A0xb559f2dd59d7c71!2sAda%2C%20the%20National%20College%20for%20Digital%20Skills!5e0!3m2!1sen!2suk!4v1791479954312!5m2!1sen!2suk",
   notes: [
     "Doors open at 09:00. For safeguarding purposes, we cannot accept latecomers.",
