@@ -102,7 +102,7 @@ export const team = [
   { name: "Matthew S", role: "Lead organiser", photo: "/images/team/mattsoh.webp" },
   { name: "Jupiter F", role: null as string | null, photo: "/images/team/lamparter.webp" },
   { name: "Nirvaan T", role: null as string | null, photo: "/images/team/duckida.webp" },
-  { name: "Nihaal S", role: null as string | null, photo: null as string | null },
+  { name: "Nihaal S", role: null as string | null, photo: "/images/team/neon.webp" },
   // { name: "Arca C", role: null as string | null, photo: "/images/team/arc.webp" },
   { name: "Derek Y", role: null as string | null, photo: "/images/team/derekyuan100.webp" },
 ];
