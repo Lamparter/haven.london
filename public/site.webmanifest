@@ -1,0 +1,14 @@
+{
+  "name": "Haven London",
+  "short_name": "Haven London",
+  "description": "Hack Club's free high school hackathon in London for teens aged 13-18.",
+  "lang": "en-GB",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#ed5615",
+  "background_color": "#ed5615",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

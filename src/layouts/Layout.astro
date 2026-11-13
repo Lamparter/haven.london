@@ -1,35 +1,83 @@
 ---
 import "../styles/global.css";
-import { event } from "../data/event";
+import { event, seo } from "../data/event";
+import { buildSchema } from "../lib/schema";
 
 interface Props {
   title?: string;
   description?: string;
+  /** Keep a page out of search results (used by the 404 page). */
+  noindex?: boolean;
+  /** Skip the event structured data on pages that aren't about the event. */
+  schema?: boolean;
 }
 
-const {
-  title = `${event.name}`,
-  description = `${event.name} is a Hack Club game jam for teens 13-18 on ${event.dateLabel}. Free food, workshops and new friends.`,
-} = Astro.props;
+const { title = seo.title, description = seo.description, noindex = false, schema = true } = Astro.props;
+
+const site = Astro.site ?? new URL("https://haven.london");
+const canonical = new URL(Astro.url.pathname, site).href;
+const image = new URL(seo.ogImage, site).href;
+const jsonLd = schema ? JSON.stringify(buildSchema(site)) : null;
 ---
 
 <html lang="en-GB">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content={noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+    />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en-GB" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Hack Club" />
+    <meta name="application-name" content={event.name} />
+    <meta name="apple-mobile-web-app-title" content={event.name} />
     <meta name="theme-color" content="#ed5615" />
+    <meta name="geo.region" content="GB-LND" />
+    <meta name="geo.placename" content="London" />
+    <meta name="geo.position" content="51.4893;-0.1497" />
+    <meta name="ICBM" content="51.4893, -0.1497" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={event.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content={String(seo.ogImageWidth)} />
+    <meta property="og:image:height" content={String(seo.ogImageHeight)} />
+    <meta property="og:image:alt" content={seo.ogImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={seo.ogImageAlt} />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- The hero background is the largest thing above the fold, so start fetching it immediately. -->
+    <link rel="preload" as="image" href="/images/hero-bg-no-sticky-tree.webp" type="image/webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Doto:wght@700;900&family=Jua&display=swap"
     />
-    <title>{title}</title>
+
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
     <slot />

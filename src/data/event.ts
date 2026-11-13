@@ -5,6 +5,7 @@ export const event = {
   name: "Haven London",
   tagline: "A game jam for teens aged 13-18",
   dateLabel: "Saturday, 14 November 2026",
+  dateShort: "14 November 2026",
   timeLabel: "09:00 - 20:00",
   startsAt: "2026-11-14T09:00:00Z",
   endsAt: "2026-11-14T20:00:00Z",
@@ -13,6 +14,16 @@ export const event = {
   parentGuideUrl:
     "https://docs.google.com/document/d/1o0IIxcglfIlBbyfnIONJiUj8o4oxToQYWQRMnnJKzkA",
   contactEmail: "london@haven.hackclub.com",
+} as const;
+
+/** Search and social metadata. The page title and description are written around what people actually search for. */
+export const seo = {
+  title: "Haven London – Hack Club's High School Hackathon in London",
+  description: `Haven London is Hack Club's free high school hackathon in London for ages 13-18. Build a game with friends on ${event.dateShort} in Pimlico. Food included.`,
+  ogImage: "/images/og-image.jpg",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: "Hack Club Haven London: a free high school hackathon in London on 14 November 2026",
 } as const;
 
 /** The email box submits as a GET, so these become the query string in this order, then `email`. */
@@ -165,6 +176,18 @@ export const pastEvents = [
 ];
 
 export const faqs = [
+  {
+    q: "What is Haven London?",
+    a: `Haven London is a free high school hackathon in London, run by Hack Club. It's a one-day game jam for teens aged 13-18, held on ${event.dateLabel} at ${event.venue}.`,
+  },
+  {
+    q: "Is this a hackathon for high school students in London?",
+    a: "Yes. Haven London is a hackathon for secondary school and sixth form students aged 13-18 in London. Teams spend the day building and shipping a game, with workshops, mentors, free food and prizes.",
+  },
+  {
+    q: "Where and when is Haven London?",
+    a: `${event.dateLabel}, ${event.timeLabel}, at ${event.venue}, ${venue.address}. The nearest stations are Victoria, Pimlico and Sloane Square.`,
+  },
   {
     q: "Who can come?",
     a: "Anyone aged 13-18. No prior coding or game-making experience needed.",

@@ -4,11 +4,18 @@ import { perks } from "../data/event";
 
 <section id="about" class="about">
   <div class="shell">
-    <h2 class="title">What is a game jam?</h2>
+    <h2 class="title">What is Haven London?</h2>
     <p class="intro">
-      It's a social coding event where you <span class="marker">make a video game with friends</span>
-      (plus free food!). It doesn't matter if you have years of experience or just learned what a game
-      jam is today.
+      Haven London is a free <span class="marker">high school hackathon in London</span> for teens
+      aged 13-18. It's a game jam: a social coding event where you make a video game with friends (plus
+      free food!). It doesn't matter if you have years of experience or just learned what a game jam
+      is today.
+    </p>
+    <p class="more">
+      Haven is run by <a href="https://hackclub.com">Hack Club</a>, the nonprofit network of teen
+      coders, and happens in cities all over the world (see
+      <a href="https://haven.hackclub.com">Haven worldwide</a>). We've hosted events in London
+      before, including Daydream, Campfire and Sunbeam. Haven London is the next one.
     </p>
 
     <ul class="perks">
@@ -44,6 +51,19 @@ import { perks } from "../data/event";
     letter-spacing: -0.02em;
     color: #fff;
     text-shadow: 0 0.06em 0 rgb(111 118 18 / 0.8);
+  }
+
+  .more {
+    max-width: 40rem;
+    margin: -2rem auto 3.5rem;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.45;
+    color: #fff;
+    text-shadow: 0 0.06em 0 rgb(111 118 18 / 0.8);
+  }
+
+  .more a {
+    color: var(--haven-butter);
   }
 
   .intro .marker {

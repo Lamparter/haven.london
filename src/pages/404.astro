@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page not found | Haven London" description="This page doesn't exist. Head back to Haven London, Hack Club's free high school hackathon in London." noindex schema={false}>
+  <main>
+    <h1>Lost in the woods</h1>
+    <p>That page doesn't exist.</p>
+    <p><a href="/">Back to Haven London</a></p>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    min-height: 100svh;
+    padding: 2rem 1rem;
+    background: var(--haven-green);
+    color: #fff;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 12vw, 7rem);
+    text-shadow: 0 0.05em 0 var(--haven-orange-deep);
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  a {
+    color: var(--haven-butter);
+  }
+</style>
