@@ -107,6 +107,7 @@ export const sponsors: { name: string; href: string; logo: string | null; logoHa
   { name: "Mr. Wang Hot Pot", href: "https://www.mrwanghotpotuk.co.uk", logo: "/images/sponsors/hotpot.webp", logoHasName: true },
   { name: "Mongoose Publishing", href: "https://www.mongoosepublishing.com", logo: "/images/sponsors/mongoose.webp" },
   { name: "Free Lives", href: "https://freelives.net", logo: "/images/sponsors/freelives.webp" },
+  { name: "Amp Code", href: "https://ampcode.com", logo: "/images/sponsors/amp.webp" },
 ];
 
 export const team = [
