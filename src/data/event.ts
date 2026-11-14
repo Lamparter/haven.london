@@ -67,14 +67,14 @@ export const perks = [
 export const schedule = [
   { time: "9:00", title: "doors open", detail: "Come and get set up!"},
   { time: "9:45", title: "opening ceremony" },
-  { time: "10:15", title: "form teams & start building" },
-  { time: "10:45", title: "workshops start" },
-  { time: "11:30", title: "lunch!" },
-  { time: "13:00", title: "lightning talks" },
-  { time: "16:30", title: "dinner" },
+  { time: "10:15", title: "form teams & start building", detail: "We'll have icebreakers!" },
+  { time: "10:25", title: "godot & ren'py workshop" },
+  { time: "12:00", title: "lunch!" },
+  { time: "14:00", title: "art workshop" },
   { time: "17:00", title: "ship projects" },
-  { time: "17:30", title: "project demos & voting" },
-  { time: "18:30", title: "closing ceremony" },
+  { time: "17:15", title: "project demos & voting", detail: "Show off your awesome game!" },
+  { time: "18:30", title: "dinner" },
+  { time: "19:00", title: "closing ceremony" },
   { time: "19:30", title: "home time" },
 ] as { time: string; title: string; detail?: string }[];
 
@@ -91,7 +91,7 @@ export const venue = {
   ] as { station: string; lines: string[]; note?: string }[],
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.302427537281!2d-0.1497113222096472!3d51.489317471809414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761c3b9c336b35%3A0xb559f2dd59d7c71!2sAda%2C%20the%20National%20College%20for%20Digital%20Skills!5e0!3m2!1sen!2suk!4v1791479954312!5m2!1sen!2suk",
   notes: [
-    "Doors open at 09:00. For safeguarding purposes, we cannot accept latecomers.",
+    "Doors are open from 09:00 to 09:45. For safeguarding purposes, we cannot accept latecomers.",
     "You will receive a QR code after signing up that you must bring to check in.",
     "The day is free, including food. You'll be asked about dietary requirements prior to the event.",
     "Bring a friend! Even if they don't know anything about coding, we'll ensure they have a great time."
