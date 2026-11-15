@@ -65,21 +65,10 @@ export const perks = [
 
 /** Rows on the departure board. While this is empty the board shows `scheduleNote` instead. */
 export const schedule = [
-  { time: "9:00", title: "doors open", detail: "Come and get set up!"},
-  { time: "9:45", title: "opening ceremony" },
-  { time: "10:15", title: "form teams & start building", detail: "We'll have icebreakers!" },
-  { time: "10:25", title: "godot & ren'py workshop" },
-  { time: "12:00", title: "lunch!" },
-  { time: "14:00", title: "art workshop" },
-  { time: "17:00", title: "ship projects" },
-  { time: "17:15", title: "project demos & voting", detail: "Show off your awesome game!" },
-  { time: "18:30", title: "dinner" },
-  { time: "19:00", title: "closing ceremony" },
-  { time: "19:30", title: "home time" },
 ] as { time: string; title: string; detail?: string }[];
 
 export const scheduleNote =
-  "We're still working out the schedule. Sign up and we'll let you know as soon as we figure it out!";
+  "For the most accurate schedule information, please visit https://telecast.haven.london.";
 
 export const venue = {
   name: event.venue,
