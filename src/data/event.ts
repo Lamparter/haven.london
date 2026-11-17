@@ -110,6 +110,7 @@ export const sponsors: { name: string; href: string; logo: string | null; logoHa
   { name: "Mongoose Publishing", href: "https://www.mongoosepublishing.com", logo: "/images/sponsors/mongoose.webp" },
   { name: "Free Lives", href: "https://freelives.net", logo: "/images/sponsors/freelives.webp" },
   { name: "Amp Code", href: "https://ampcode.com", logo: "/images/sponsors/amp.webp" },
+  { name: "Failbetter Games", href: "https://www.failbettergames.com", logo: "/images/sponsors/failbetter.webp", logoHasName: true },
 ];
 
 export const team = [
